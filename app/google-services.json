@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "769570605899",
+    "project_id": "text-recognition-941e1",
+    "storage_bucket": "text-recognition-941e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769570605899:android:5e0eb4f41b50fd207cf6ce",
+        "android_client_info": {
+          "package_name": "com.example.textrecognition"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZbLpLCAxpEtB6zF8qHqtYy_Bk6jXTreM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
