@@ -1,15 +1,12 @@
 package com.example.textrecognition
 
-import android.content.Context
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.textrecognition.test.TestPhotos
 import com.google.mlkit.vision.text.Text
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -38,7 +35,7 @@ internal class MainActivityViewModel @Inject constructor(
     }
 
     internal fun runTest() = viewModelScope.launch(Dispatchers.IO) {
-        val listExcelEntity = testPhotos.getListExcelEntity(10)
+        val listExcelEntity = testPhotos.getListExcelEntity(500)
         val pairResult = testPhotos.getListResult(listExcelEntity)
         testPhotos.saveListResult(pairResult.second)
         testPhotos.saveString(pairResult.first)
