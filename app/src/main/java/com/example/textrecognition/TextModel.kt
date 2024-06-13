@@ -13,12 +13,13 @@ internal class TextModel @Inject constructor(
     @ApplicationContext private val applicationContext: Context
 ) {
 
+    private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+
     internal interface TextListener {
         fun onSuccess(imageUri: Uri, text: Text)
     }
 
     internal fun recognize(imageUri: Uri, textListener: TextListener) {
-        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
         val image = InputImage.fromFilePath(applicationContext, imageUri)
         recognizer.process(image)
             .addOnSuccessListener { text ->

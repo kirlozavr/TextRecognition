@@ -57,6 +57,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.google.mlkit:text-recognition:16.0.0")
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
