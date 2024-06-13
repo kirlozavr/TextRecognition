@@ -39,15 +39,14 @@ internal class TextModel @Inject constructor(
 
     internal suspend fun recognize(bitmap: Bitmap): Text{
         return coroutineScope {
-            val deferred = async {
+            async {
                 suspendCoroutine<Text> { continuation ->
                     val image = InputImage.fromBitmap(bitmap, 0)
                     recognizer.process(image).addOnSuccessListener {
                         continuation.resume(it)
                     }
                 }
-            }
-            deferred.await()
+            }.await()
         }
     }
 }
