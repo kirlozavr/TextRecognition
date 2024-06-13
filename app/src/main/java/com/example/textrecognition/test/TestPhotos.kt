@@ -100,7 +100,7 @@ internal class TestPhotos @Inject constructor(
     }
 
     internal fun saveString(string: String){
-        val file = File(applicationContext.filesDir.absolutePath, "string_result.json")
+        val file = File(applicationContext.filesDir.absolutePath, "string_result.txt")
         file.createNewFile()
         file.writeBytes(string.encodeToByteArray())
     }
