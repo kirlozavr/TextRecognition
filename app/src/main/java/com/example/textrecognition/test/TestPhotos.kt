@@ -99,6 +99,14 @@ internal class TestPhotos @Inject constructor(
         file.writeBytes(json.encodeToByteArray())
     }
 
+    internal fun saveListResult(jsonName: String, listResult: List<Result>){
+        val gson = Gson()
+        val json = gson.toJson(listResult)
+        val file = File(applicationContext.filesDir.absolutePath, "${jsonName}.json")
+        file.createNewFile()
+        file.writeBytes(json.encodeToByteArray())
+    }
+
     internal fun saveString(string: String){
         val file = File(applicationContext.filesDir.absolutePath, "string_result.txt")
         file.createNewFile()

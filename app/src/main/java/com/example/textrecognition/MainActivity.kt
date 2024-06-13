@@ -38,7 +38,6 @@ internal class MainActivity : AppCompatActivity() {
 
         initViews()
         initObservers()
-        viewModel.runTest()
 
         setContentView(binding.root)
     }
