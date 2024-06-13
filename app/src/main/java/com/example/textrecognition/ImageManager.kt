@@ -8,7 +8,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class ImageManager @Inject constructor(
     @ApplicationContext private val applicationContext: Context
 ) {

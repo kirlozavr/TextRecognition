@@ -1,17 +1,25 @@
 package com.example.textrecognition
 
+import android.content.Context
 import android.net.Uri
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.textrecognition.test.TestPhotos
 import com.google.mlkit.vision.text.Text
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 internal class MainActivityViewModel @Inject constructor(
     private val imageManager: ImageManager,
-    private val textModel: TextModel
+    private val textModel: TextModel,
+    private val testPhotos: TestPhotos
 ) : ViewModel() {
 
     private val _imageFileFromCameraEvent: SingleLiveEvent<File> = SingleLiveEvent()
@@ -20,10 +28,21 @@ internal class MainActivityViewModel @Inject constructor(
     private val _textRecognizeEvent: SingleLiveEvent<Pair<Uri, Text>> = SingleLiveEvent()
     internal val textRecognizeEvent: LiveData<Pair<Uri, Text>> get() = _textRecognizeEvent
 
+    private val _finishedEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    internal val finishedEvent: LiveData<Unit> get() = _finishedEvent
+
     private val textListener = object : TextModel.TextListener{
         override fun onSuccess(imageUri: Uri, text: Text) {
             _textRecognizeEvent.postValue(Pair(imageUri, text))
         }
+    }
+
+    internal fun runTest() = viewModelScope.launch(Dispatchers.IO) {
+        val listExcelEntity = testPhotos.getListExcelEntity(10)
+        val pairResult = testPhotos.getListResult(listExcelEntity)
+        testPhotos.saveListResult(pairResult.second)
+        testPhotos.saveString(pairResult.first)
+        _finishedEvent.postValue(Unit)
     }
 
     internal fun openCamera(cameraManager: CameraManager) {

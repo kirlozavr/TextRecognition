@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,11 +38,20 @@ internal class MainActivity : AppCompatActivity() {
 
         initViews()
         initObservers()
+        viewModel.runTest()
 
         setContentView(binding.root)
     }
 
     private fun initObservers(){
+        viewModel.finishedEvent.observe(this){
+            Toast.makeText(
+                applicationContext,
+                "Всеапмашмащшкрауркмаркгрмг гркгмркугргр куме",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
         viewModel.imageFileFromCameraEvent.observe(this){ imageFile ->
             viewModel.recognize(imageFile.toUri())
         }
